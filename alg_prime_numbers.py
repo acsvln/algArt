@@ -41,9 +41,9 @@ def sundaram(N):
 
 def atkin(limit):
     sqr_lim = int(sqrt(limit))
-    simples = [False] * limit
-    simples[2] = True
-    simples[3] = True
+    primes = [False] * limit
+    primes[2] = True
+    primes[3] = True
     x2 = 0
     for i in range(1, sqr_lim + 1):
         x2 = x2 + 2 * i - 1
@@ -52,25 +52,25 @@ def atkin(limit):
             y2 = y2 + 2 * j - 1
             n = 4 * x2 + y2
             if (n < limit) and (((n % 12) == 1) or ((n % 12) == 5 )):
-                simples[n] = not simples[n]
+                primes[n] = not primes[n]
             n = n - x2
             if (n <= limit) and ((n % 12) == 7):
-                simples[n] = not simples[n]
+                primes[n] = not primes[n]
             n = n - 2 * y2
 
             if (i > j) and (n < limit) and ((n % 12) == 11):
-                simples[n] = not simples[n]
+                primes[n] = not primes[n]
 
     for i in range(5, sqr_lim + 1):
-        if simples[i]:
+        if primes[i]:
             n = i * i
             j = n
             while j <= limit:
-                simples[j] = False
+                primes[j] = False
                 j = j + limit
 
     result = []
-    for index, element in enumerate(simples):
+    for index, element in enumerate(primes):
         if element:
             result.append(index)
     return result
